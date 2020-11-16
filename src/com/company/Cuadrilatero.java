@@ -5,12 +5,17 @@ import java.util.concurrent.Semaphore;
 public class Cuadrilatero {
 
     private static final int participantes = 2;
-    private final Semaphore available = new Semaphore(participantes,true);
+    public static final Semaphore available = new Semaphore(participantes,true);
 
-    public static void addparticipante()  throws InterruptedException{
-        available.notify();
+
+
+    public static void addparticipante() throws InterruptedException{
+        available.acquire();
     }
 
-    public void acabarCombate(Luchador luchador){ available.release();}
+    public static void acabarCombate(Luchador luchador) throws InterruptedException{
+
+        available.release();
+    }
 
 }
